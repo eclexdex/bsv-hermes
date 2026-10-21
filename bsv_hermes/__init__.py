@@ -1,2 +1,2 @@
-"""Custody-free offline BSV inspection primitives."""
-__version__ = "0.2.0"
+"""Offline BSV evidence primitives and explicitly enabled mainnet workflow."""
+__version__ = "0.3.0rc1"

@@ -8,17 +8,17 @@
 
 **Inspect the bytes. Commit the work. Keep the evidence boundaries visible.**
 
-Offline by default · Python standard library · Six default tools · Three opt-in kits
+Offline by default · Six dependency-free default tools · Optional guarded mainnet publication
 
 [Quick start](#quick-start) · [Workflows](#agent-workflows) · [Tools](#what-you-can-do) · [Dashboards](#dashboard-preview) · [BSV resources](#learn-and-build-with-bsv) · [FAQ](#faq) · [Documentation](#documentation)
 
 </div>
 
-> **Experimental · v0.2.0.** This is an offline Hermes-native plugin, not a wallet or a chain-verification service. No signing, payments, broadcasting or automatic publication. License selection is pending; see [license policy](LICENSE-POLICY.md).
+> **Release candidate · v0.3.0rc1.** Six tools remain offline by default. The opt-in mainnet group integrates a dedicated wallet, bounded funding observations, exact transaction construction, separately authorized signing/submission and readback receipts. No automatic publication, arbitrary payments or chain-consensus verification. Production OS/custody isolation and any funded canary remain separate operator work. License selection is pending; see [license policy](LICENSE-POLICY.md).
 
 Give your Hermes agent tools to inspect transaction and Script bytes, plan unsigned commitments, and produce versioned receipts for supplied SOUL content and work products. Add instruction, deployment-evidence and batch workflows through optional kits in the same installation.
 
-The plugin processes supplied inputs. It does not discover your private files, read your home SOUL, collect live agent activity or contact a blockchain provider. Three packaged task skills help your agent choose the right workflow and explain its results.
+The default tools process supplied inputs without private-file discovery, home SOUL reads, activity collection or provider contact. Three packaged task skills explain the workflows. Mainnet operations require a separately provisioned dedicated runtime and independently controlled operator authority; see the [mainnet ceremony and trust boundary](docs/MAINNET.md).
 
 ## Quick start
 
@@ -154,7 +154,7 @@ The `network` field binds a receipt's declared context. It does not create a net
 The installation includes three task skills:
 
 - `bsv-hermes:inspect-evidence` — inspect bytes and distinguish local findings from unchecked claims.
-- `bsv-hermes:plan-commitment` — prepare commitments without signing or publishing.
+- `bsv-hermes:plan-commitment` — offline planning by default; guarded mainnet workflow only when separately configured and approved.
 - `bsv-hermes:audit-workproducts` — work with supplied work-product and deployment evidence.
 
 Discover them with `skills_list`, then load the selected skill with `skill_view`.
@@ -179,9 +179,41 @@ Review configuration changes yourself and restart to apply. The repository never
 | Assurance | `bsv_assurance_tool_chain`, `bsv_assurance_deployment_gate`, `bsv_assurance_approval_intent` | Evidence chains and advisory deployment/approval checks |
 | Integrations | `bsv_int_batch`, `bsv_int_verify_batch`, `bsv_int_content`, `bsv_int_overlay`, `bsv_int_handoff`, `bsv_int_chain`, `bsv_int_reconcile` | Offline batches, content and handoff/reconciliation workflows |
 
-All kits enabled gives **19 tools in one toolset**. No kit adds authenticated human authorization, network transport or spending powers.
+The three **offline** kits give 19 tools. They do not grant authority. The separate
+`mainnet` group adds eight guarded tools: defaults + mainnet = **14 tools**; all
+four groups = **27 tools**, still one plugin and one `bsv` toolset. No new advanced
+protocol or dashboard packs were merged.
 
-Public-chain transport, newer protocol packs and dashboard/visual builders are not included in this version. Separate development candidates are not shipped capabilities.
+### Opt-in mainnet workflow
+
+| Tool | Actual behavior |
+|---|---|
+| `bsv_wallet_address` | Dedicated wallet public metadata; no wallet discovery/import |
+| `bsv_funding_status` | Bounded mainnet provider GET observations; does not transfer coins |
+| `bsv_publish_prepare` | Exact unsigned digest quote from confirmed observed inputs |
+| `bsv_publish_sign` | Independent operator grant, shared budget/input locks before real SDK custody |
+| `bsv_publish_submit` | Separate exact-txid grant, durable at-most-once dispatch |
+| `bsv_publish_status` | Read local workflow and budget state |
+| `bsv_publish_receipt` | Readback reconciliation only; never retries submission |
+| `bsv_spend_policy_status` | Shared aggregate/session spent, reserved and remaining cap |
+
+The human operator creates the fresh wallet and chooses caps through the operator
+CLI, funds its verified address separately, reviews the exact plan, approves
+signing, then independently approves the final txid for submission. Native tools
+cannot create authority, supply approval JSON, select a different wallet/session,
+or release budget. Signed transaction bytes are retained locally, not returned to
+model transcripts. A missing real adapter/dependency fails closed.
+
+Use the [complete executable procedure](docs/MAINNET.md). The `mainnet` extra pins
+`bsv-sdk==2.4.0` and `cryptography==48.0.0`; use a separate SDK interpreter, not the
+Hermes host environment. **Separate Python is not a security sandbox.** Protect
+custody and operator administration with an appropriate trusted OS/broker boundary
+before funding. The SDK is Open BSV License v4, **not MIT**; reviewed notices and a
+platform-specific hash lock are bundled.
+
+This candidate has executed real SDK signing and local HTTP submission/readback
+using freshly generated never-funded keys and invented ancestry. It has **not**
+spent mainnet funds, submitted to a public broadcaster or enabled a live profile.
 
 ## Dashboard preview
 
@@ -214,7 +246,7 @@ See [Security](SECURITY.md), [exact formats](docs/CONTRACT.md) and [provenance](
 <details>
 <summary><strong>Do I need a wallet or BSV funds?</strong></summary>
 
-No. Every shipped tool runs offline. Commitment plans are unsigned and unsubmitted; nothing pays fees or broadcasts.
+Not for the six defaults or three offline kits. The opt-in mainnet workflow requires a new operator-provisioned dedicated wallet, user funding and independent signing/submission approvals. It is never activated by installation.
 
 </details>
 
@@ -255,7 +287,7 @@ python -m unittest discover -s tests -v
 python scripts/update_manifest.py --check
 ```
 
-Without Hermes host dependencies, the suite explicitly skips one native-host test. That is not native acceptance. For real Doctor, PluginContext, scoped dispatch and installed-skill checks, use your compatible Hermes host's Python environment:
+Without Hermes host dependencies, one native-host test is explicitly skipped. Without the exact mainnet extra, crypto/workflow tests are separately skipped. Neither skip counts as acceptance. For real Doctor, PluginContext, scoped dispatch and installed-skill checks, use your compatible Hermes host's Python environment:
 
 ```sh
 python scripts/native_smoke.py .
@@ -263,7 +295,19 @@ python scripts/native_smoke.py .
 
 For a source-checkout Hermes environment, ensure the Hermes checkout is importable as well as its dependencies—for example, set `PYTHONPATH=/absolute/path/to/hermes-agent` when invoking that environment's Python. This prevents missing host-module errors such as `hermes_yaml`.
 
-The native smoke uses temporary homes, exercises the six defaults and all optional groups, checks three registered skill paths and blocks socket connections. It does not enable your live profile.
+The default native smoke uses temporary homes, exercises the six defaults and
+three offline groups, checks three registered skill paths and blocks socket
+connections. For the eight added tools, use the same Hermes interpreter plus an
+isolated, pinned SDK interpreter:
+
+```sh
+python scripts/mainnet_smoke.py . --sdk-python /absolute/dedicated-sdk-venv/bin/python
+```
+
+This performs actual registry dispatch through real SDK worker subprocesses,
+operator-only approvals, a real loopback HTTP provider and exact txid/raw readback.
+The loopback adapters exist only in the test harness; they are not native settings
+or synthetic production fallbacks. No live profile or public POST is used.
 
 With trusted setuptools >=77 already installed, build without dependency downloads:
 
@@ -286,12 +330,13 @@ Choose the reference that matches your next step. These are external resources, 
 | Work with the TypeScript SDK | [BSV TypeScript SDK](https://github.com/bsv-blockchain/ts-sdk) | SDK source, installation guidance and application-building primitives |
 | Explore implementation repositories | [BSV Blockchain on GitHub](https://github.com/bsv-blockchain) | Source projects and their individual documentation and licenses |
 
-**Suggested path:** learn the transaction model → inspect supplied bytes locally → prepare an unsigned commitment → review the relevant SDK and specification before designing any separate signing or submission integration.
+**Suggested path:** inspect supplied bytes locally → prepare a commitment → review the [mainnet trust boundary and operator ceremony](docs/MAINNET.md) before any signing or submission.
 
 The external guides describe features such as wallets, HTTP payments, UHRP and SPV. Linking to them does **not** mean this plugin implements those features. BRCs include historical and evolving material: check directory guidance and normative status rather than assuming every proposal is a current interoperable standard. External code and documents retain their own terms.
 
 ## Documentation
 
+- [Mainnet operator ceremony and recovery](docs/MAINNET.md)
 - [Result contracts and formats](docs/CONTRACT.md)
 - [Verification and packaging](docs/VERIFICATION.md)
 - [Security boundaries](SECURITY.md)

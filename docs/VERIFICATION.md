@@ -1,36 +1,96 @@
 # Verification and acceptance boundary
 
-Runtime and test framework are standard-library-only. The native smoke additionally needs an installed compatible Hermes environment. Actual compatibility was exercised with Hermes revision `fda9fb75b4ad2f641cdcf56fdfb13fbf581705ac` and Python3.11.15; host-independent tests also ran on Python3.9.6. No claim covers every host release or Windows/macOS/Linux filesystem race model.
+The base/default and three offline kits remain dependency-free. Their original
+70 tests are retained unchanged. New integration tests use a separate environment
+with bsv-sdk 2.4.0 and cryptography 48.0.0; no real wallet, operator credential,
+private SOUL, public POST or funded spend is permitted in this acceptance path.
 
-## Development evidence
-
-- Original base15, identity20, assurance20 and integrations21 tests replayed successfully from preserved copies with host dependencies. Zero skips in those original runs. The first integrations capture omitted a packaging LICENSE input; the corrected supplemental capture and replay passed, without changing staging source.
-- Integrated source suite:70 tests passed, zero skips with host dependencies. Host-independent run:69 passed and1 native-host test explicitly skipped. A skip never counts as native acceptance.
-- Actual Doctor/default registration, real PluginContext/configuration, `registry.dispatch` JSON-string ABI,6defaults and19all-groups tool names, valid/invalid calls for every tool, and3actual registered skill paths are covered by `scripts/native_smoke.py`.
-- TDD receipts retain failures then passes for six-default assembly, optional groups/capability reporting/collisions, early budgets/schema types, four F1 boolean/float substitutions, batch private-proof output policy, installer behavior, native skill/composite smoke and source-manifest creation.
-- Original domain/preimage tests remain, plus independent Merkle/index/count/network and second-chain-link fixtures,27gate-invalid cases, nonce/redaction/receipt-tamper checks and explicit `ok:true`/comparison-false controls.
-
-Raw evidence and source transformations live outside shipping inventory. A prior original native smoke used direct handlers; the consolidated native acceptance uses **scoped registry.dispatch**, not only handlers/facade doubles. No assembly-shell capture facade is used.
-
-## Reproduce on reviewed source
+## Reproduce
 
 ```sh
+# Host-independent/default suite; inspect skips rather than counting them as passes.
 python -m unittest discover -s tests -v
 python scripts/update_manifest.py --check
+
+# Use the compatible Hermes host interpreter for these native checks.
 python scripts/native_smoke.py .
+python scripts/mainnet_smoke.py . --sdk-python /absolute/pinned-sdk-venv/bin/python
+
+# Exercise real crypto tests with the isolated SDK environment itself.
+/absolute/pinned-sdk-venv/bin/python -m unittest discover -s tests -v
 ```
 
-Run the last command with the Hermes dependency interpreter. Use an explicit temporary HOME/HERMES_HOME when invoking host CLI help or Doctor; never point tests at the live profile. The smoke creates its own isolated host configuration and blocks outbound socket connects, but is not an OS sandbox.
+For a Hermes source checkout, make its source importable, for example with an
+explicit `PYTHONPATH` while invoking the host's dependency interpreter. Do not
+point test HOME/HERMES_HOME at a live profile. Scripts use temporary synthetic
+homes; temporary directories should be directed to a trusted local scratch root.
+Missing Hermes explicitly skips the host case; missing **exact** SDK pins skips
+mainnet cases. A skipped case never establishes acceptance.
 
-## Artifact acceptance checklist
+## What is exercised
 
-1. Regenerate canonical source inventory only after reviewed changes. Record its separate SHA256; it excludes its own bytes. Never embed a changing report's hash in itself.
-2. Build fresh wheel/sdist with already-installed setuptools. Audit inventories: one native manifest/entry, all three skills, no verification trees, credentials, machine paths, extra plugin manifests, archives or links/traversal. Generated package metadata is audited separately from source hashes.
-3. Extract sdist outside the checkout. Recheck manifest hashes. Exercise installer dry-run and explicit install into an existing temporary synthetic profile; verify config unchanged and collisions refused. Read back installed hashes.
-4. Run full tests and native smoke against that installed directory, with source absent from import paths. Confirm default6 and optional19 dispatch, three installed skill paths, errors and negative comparisons.
-5. Install wheel with `pip install --no-index --no-deps` into a clean temporary venv; run pure domain/adapter suites outside checkout and confirm imports resolve to site-packages. Wheel is a library, not native placement. Rebuild wheel from sdist as an additional packaging check.
-6. Keep exact commands, interpreter/version, host revision, exit codes, source-manifest hash and artifact hashes in a separate local receipt. Final parent review verifies those bytes before any release decision.
+- Actual Plugin Doctor, PluginContext registration and scoped `registry.dispatch`
+  JSON-string ABI; not only direct handlers or registration doubles.
+- Six defaults and nineteen tools with the three offline groups; three actual
+  registered skill paths. The separate mainnet smoke verifies fourteen tools
+  (six defaults plus eight mainnet), valid dispatch for every added tool and
+  invalid/spoofed fields rejected before runtime work.
+- Native subprocess crossing into the isolated SDK interpreter, real fresh
+  never-funded key creation, funding observation mapping, real builder/signature
+  computation and independent PyCA verification. No fake signature or invented
+  production adapter result substitutes for missing dependencies.
+- Separate operator-only signed grants and exact plan/txid binding; aggregate
+  outstanding budget/input locks claimed before custody; corrupted/forged grants,
+  revocation, stale inputs, changed signed bytes and concurrent callers.
+- Real loopback HTTP submission and exact txid/raw transaction readback, delayed
+  observation, ambiguous outcomes, lost signing results and crash-after-dispatch.
+  Locks remain held and repeated calls do not resend. The provider/ancestry are
+  explicitly synthetic. This is transport/software evidence, not chain success.
+- Default import/registration is offline. Test transport injection lives in the
+  harness, not runtime configuration or caller-selectable arguments.
 
-## What is not verified or approved
+The single combined mainnet native smoke runs real isolated workers with trusted
+test-only loopback adapters. The unmodified shipped worker is also exercised by
+SDK tests for wallet/status/error calls. The native API never accepts a backend
+factory/module, loopback URL, authority path, key, grant or arbitrary script.
 
-No live profile activation, actual private persona/config/session reading, wallet access, chain/network requests, authentication/signatures, transactions, spending, deployment, upload, commit or publication. No SDK/BRC/BEEF/BUMP/SPV/PoW/chain-selection conformance, human consent or production logging/privacy certification. Public-chain/newer protocol/UI packs are not included. Independent final integrated review, public owner/visibility/attribution and license approval remain outstanding.
+## Distribution acceptance
+
+1. Preserve baseline source/test output. Rehash final selected source inputs,
+   including current signer bytes rather than stale acceptance snapshots.
+2. Refresh `SOURCE-MANIFEST.json` only after reviewed edits. Its sorted compact
+   JSON maps every shipping source/test/doc/helper/resource file except itself;
+   bind its own SHA256 separately. Hashes detect drift, not author authenticity.
+3. Build fresh wheel and sdist with reviewed tooling. Inspect all archive members:
+   one native root/manifest in the sdist, three skills and mainnet lock/notices,
+   exact direct dependency pins, no extra plugin, links, traversal, private paths,
+   wallet/authority files, grants, databases, verification logs, build environments,
+   upstream archives or SDK binaries.
+4. Extract the sdist outside the checkout. Recheck its manifest and install via the
+   explicit local installer into an existing synthetic profile. Verify dry-run,
+   no config mutation, no overwrite and exact installed hashes.
+5. Repeat actual Doctor/default and mainnet registry dispatch, skill discovery,
+   source tests and crypto tests on extracted/installed bytes with the original
+   source absent from import paths. Wheel installation alone is not native-plugin
+   acceptance.
+6. Install the wheel in a fresh environment, check `site-packages` origin and all
+   resources, run library/worker checks outside the checkout and rebuild from the
+   extracted source. Keep direct SDK and Hermes dependencies isolated.
+7. Preserve exact commands, return codes, full stdout/stderr, source and archive
+   hashes in ignored local receipts. The parent owns independent final review,
+   staging, commit and any later push. No build script performs those operations.
+
+The project CI currently covers the dependency-free suite and clean base wheel;
+it does not certify mainnet crypto/platform compatibility. The mainnet native
+smoke and isolated SDK suite must be run explicitly for a release candidate.
+
+## Not certified or approved
+
+No funded/public-provider submission, trusted-chain inclusion/SPV/consensus,
+mainnet fee acceptance, production broker isolation, human authentication channel,
+private-backup policy, power-loss/rollback resistance, cross-platform custody or
+complete SDK security audit is claimed. Same-UID file/shell access defeats the
+operator boundary. Crashes between journal/ledger writes can strand availability
+and require trusted reconciliation, never reset/refund. No live configuration,
+Git staging/commit/push, release license selection or publication is performed by
+this verification workflow. See [MAINNET.md](MAINNET.md) and [SECURITY.md](../SECURITY.md).

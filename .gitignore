@@ -7,3 +7,13 @@ dist/
 local-verification/
 red-*.txt
 green-*.txt
+# Never commit custody, authority or workflow runtime state.
+wallet.json
+authority.json
+state.json
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+.venv-*/
+*-venv/

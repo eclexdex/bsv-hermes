@@ -1,6 +1,6 @@
 name: bsv-hermes
-version: "0.2.0"
-description: "Offline supplied-evidence inspection and commitments. No custody, network or publication."
+version: "0.3.0rc1"
+description: "Offline evidence defaults; opt-in, separately authorized mainnet digest publication."
 # Default surface. Optional tools are selected through enabled_kits, not separate plugins.
 provides_tools:
   - bsv_capabilities
@@ -16,4 +16,12 @@ config_schema:
   enabled_kits:
     type: array
     default: []
-    description: "Explicit offline groups: identity, assurance, integrations. Unknown or duplicate values reject loading."
+    description: "Explicit groups: identity, assurance, integrations, mainnet. No group is enabled by default."
+  mainnet_directory:
+    type: string
+    default: ""
+    description: "Operator-bound absolute dedicated runtime directory; never a tool argument."
+  mainnet_python:
+    type: string
+    default: ""
+    description: "Operator-bound absolute Python executable in the isolated pinned mainnet environment."

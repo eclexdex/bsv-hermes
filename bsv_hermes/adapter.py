@@ -6,7 +6,7 @@ from .kits.identity import operations as identity
 from .kits.assurance import operations as assurance
 from .kits.integrations import operations as integrations
 
-GROUPS = ('identity', 'assurance', 'integrations')
+GROUPS = ('identity', 'assurance', 'integrations', 'mainnet')
 
 
 def _invoke(arguments, function, required, optional=()):
@@ -63,11 +63,11 @@ SKILLS = ('inspect-evidence', 'plan-commitment', 'audit-workproducts')
 
 def _selected(groups):
     if type(groups) is not list or any(type(g) is not str or g not in GROUPS for g in groups) or len(set(groups)) != len(groups):
-        raise ValueError('enabled_kits must be a unique list from identity, assurance, integrations')
+        raise ValueError('enabled_kits must be a unique list from identity, assurance, integrations, mainnet')
     return sorted(groups)
 
 
-def tool_specs(groups=None):
+def tool_specs(groups=None, *, mainnet_directory=None, mainnet_python=None):
     groups = _selected([] if groups is None else groups)
     tools = {}
     for name, (handler, description, properties, required) in TOOLS.items():
@@ -101,13 +101,24 @@ def tool_specs(groups=None):
             'type': 'boolean', 'default': False, 'description': 'Explicit private proof export; proofs permit guessing and correlation.'}
         batch_schema['description'] = 'Create v1 ordered Merkle commitment. Proofs omitted unless explicitly exported privately.'
         tools['bsv_int_batch'] = (_kit_handler(_batch), batch_schema)
+    if 'mainnet' in groups:
+        from .mainnet.native import tool_specs as mainnet_specs
+        tools.update(mainnet_specs(mainnet_directory, mainnet_python))
     return {name: (boundary.native(handler, schema['parameters']), schema) for name, (handler, schema) in tools.items()}
 
 
-def _capabilities(names=None, groups=None):
-    return {'implemented': sorted(tool_specs() if names is None else names),
-            'enabled_kits': [] if groups is None else list(groups), 'available_kits': list(GROUPS),
-            'network': False, 'signing': False, 'payments': False, 'broadcast': False}
+def _capabilities(names=None, groups=None, mainnet_settings=None):
+    enabled = groups is not None and 'mainnet' in groups
+    result = {'implemented': sorted(tool_specs() if names is None else names),
+              'enabled_kits': [] if groups is None else list(groups), 'available_kits': list(GROUPS),
+              'network': enabled, 'signing': enabled, 'payments': False, 'broadcast': enabled}
+    if enabled:
+        settings = mainnet_settings or {}
+        result['mainnet'] = {'configured': all(type(settings.get(k)) is str and Path(settings[k]).is_absolute()
+                    for k in ('mainnet_directory', 'mainnet_python')), 'ready_for_mainnet': False,
+                    'authorization': 'independent_operator_sign_and_submit_grants',
+                    'scope': 'dedicated P2PKH digest publication only; flags denote available operations, not authority'}
+    return result
 
 
 def capabilities(arguments, **kwargs):
@@ -116,10 +127,14 @@ def capabilities(arguments, **kwargs):
 
 def register(ctx):
     groups = _selected(ctx.get_config('enabled_kits', []))
-    specs = tool_specs(groups)
+    mainnet_settings = {}
+    if 'mainnet' in groups:
+        mainnet_settings = {'mainnet_directory': ctx.get_config('mainnet_directory', None),
+                            'mainnet_python': ctx.get_config('mainnet_python', None)}
+    specs = tool_specs(groups, **mainnet_settings)
     registered, handles = [], []
     specs['bsv_capabilities'] = (
-        boundary.native(lambda args, **kw: _invoke(args, lambda: _capabilities(registered, groups), ()), specs['bsv_capabilities'][1]['parameters']),
+        boundary.native(lambda args, **kw: _invoke(args, lambda: _capabilities(registered, groups, mainnet_settings), ()), specs['bsv_capabilities'][1]['parameters']),
         specs['bsv_capabilities'][1])
     try:
         for name, (handler, schema) in specs.items():
