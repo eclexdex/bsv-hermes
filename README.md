@@ -1,26 +1,48 @@
-# bsv-hermes — provisional, unpublished
+<div align="center">
 
-One Hermes-native directory plugin, one `bsv` toolset, one Python distribution. Six offline defaults plus three explicitly opt-in groups. Runtime dependencies: Python standard library only. No wallet, signing, network, payment or publication tools.
+# BSV Hermes
 
-## Easy local installation
+### One native toolset for inspecting BSV data and creating agent evidence commitments.
 
-Review source and [license policy](LICENSE-POLICY.md). Public owner/license are pending; these artifacts are not release approval. Use the source checkout or extract the **source distribution**, not the library wheel.
+**Inspect the bytes. Commit the work. Keep the evidence boundaries visible.**
 
-From that source root, with an **existing, explicit absolute profile directory**:
+Offline by default · Python standard library · Six default tools · Three opt-in kits
+
+[Quick start](#quick-start) · [How it works](#how-it-works) · [What you can do](#what-you-can-do) · [Optional kits](#optional-kits) · [FAQ](#faq) · [Documentation](#documentation)
+
+</div>
+
+> **Experimental · v0.2.0.** This is an offline Hermes-native plugin, not a wallet or a chain-verification service. No signing, payments, broadcasting or automatic publication. License selection is pending; see [license policy](LICENSE-POLICY.md).
+
+Give your Hermes agent tools to inspect transaction and Script bytes, plan unsigned commitments, and produce versioned receipts for supplied SOUL content and work products. Add instruction, deployment-evidence and batch workflows through optional kits in the same installation.
+
+The plugin processes supplied inputs. It does not discover your private files, read your home SOUL, collect live agent activity or contact a blockchain provider. Three packaged task skills help your agent choose the right workflow and explain its results.
+
+## Quick start
+
+### Install into your chosen Hermes profile
+
+You need Python 3.9+ and a compatible Hermes host with native directory-plugin support. Use this source checkout or an extracted source distribution. The wheel is a Python library with packaged skills—not a native plugin installer.
 
 ```sh
+git clone https://github.com/eclexdex/bsv-hermes.git
+cd bsv-hermes
 python scripts/install_local.py --profile /absolute/path/to/profile
 ```
 
-This is a dry-run: verifies the canonical source inventory and each hash, rejects unsafe links/traversal/collisions, and writes nothing. To actually copy the reviewed files:
+Replace the path with an **existing absolute Hermes profile directory**. The command defaults to a dry-run: it checks the source inventory and hashes, rejects collisions and unsafe links, and writes nothing.
+
+Review the result, then explicitly install:
 
 ```sh
 python scripts/install_local.py --profile /absolute/path/to/profile --install
 ```
 
-It creates only `<profile>/plugins/bsv-hermes`, reads it back, refuses overwrite and **does not edit config, enable anything, fetch dependencies or use Git/network**. It never infers your home/profile. A future upgrade needs a separately reviewed removal/migration; this installer has no force flag. Only run against a trusted local filesystem without concurrent writers to the target ancestors.
+The installer copies into `<profile>/plugins/bsv-hermes` and reads the installed files back. It does not enable the plugin, change configuration, fetch dependencies or infer your profile. Existing targets are not overwritten. Use a trusted local filesystem without concurrent writers to the target ancestors.
 
-Then explicitly select the same profile and approve activation yourself. POSIX shells:
+### Review and enable
+
+In a POSIX shell, select the same profile:
 
 ```sh
 export HERMES_HOME=/absolute/path/to/profile
@@ -28,28 +50,84 @@ hermes plugins doctor "$HERMES_HOME/plugins/bsv-hermes"
 hermes plugins enable bsv-hermes
 ```
 
-PowerShell: set `$env:HERMES_HOME = 'C:\absolute\profile'`, then run the same `hermes plugins enable bsv-hermes` command. Restart Hermes or use `/reset` to refresh tools/skills. `hermes plugins install .` is **not** this local directory installation route: current CLI install accepts catalog/Git identifiers. No approved Git repository identifier exists yet.
+Restart Hermes or use `/reset` to refresh tools and skills. In PowerShell, set `$env:HERMES_HOME = 'C:\absolute\profile'` before running the Hermes commands; Windows execution has not been certified for this candidate.
 
-The wheel is a **library + packaged skills**, not an automatic native plugin install. Native discovery uses the root `plugin.yaml` and root `register(ctx)` entry in the source distribution; no untested entry-point requirement is invented.
+This is the tested local-copy route. `hermes plugins install .` is not its equivalent; current Hermes installation commands accept catalog/Git identifiers. A direct Git installation route has not been independently accepted for this repository.
 
-## Default tools
+### Ask your agent
 
-| Tool | Supplied input and result |
-|---|---|
-| `bsv_capabilities` | `{}` → actual registered names and enabled groups |
-| `bsv_inspect_transaction` | Legacy transaction hex → bounded structural summary/txid |
-| `bsv_inspect_script` | Script hex → inert disassembly, never execution |
-| `bsv_plan_commitment` | Exact UTF-8 text → unsigned SHA256 OP_RETURN script plan |
-| `bsv_identity_soul` | Exact supplied bytes as base64 + network → versioned SOUL commitment/receipt comparison |
-| `bsv_assurance_artifact` | Supplied digest/byte-count records + network/nonce → workproduct digest receipt |
+```text
+Use the BSV tools to plan a commitment for the text "harvest receipt / lot 001".
+Show the digest and unsigned script. Explain what the result proves and what
+remains unchecked. Do not sign, broadcast or publish anything.
+```
 
-Examples: `bsv_plan_commitment({"text":"hello"})` and `bsv_identity_soul({"data_b64":"aGVsbG8=","network":"testnet"})`. These produce **different formats on purpose**. No home SOUL or file content is discovered automatically.
+Or bring your own approved input:
 
-Native results are JSON strings: `{"ok":true,"result":...}` (optional `warnings`) or `{"ok":false,"error":{"code":"invalid_input","message":"..."}}`. **Execution success is not comparison success**: `result.matches`, `digest_match`, `evidence_ready`, or the boolean `result` of batch verification may be false. Inspect them separately.
+```text
+Inspect this transaction hex without executing scripts or contacting a network.
+Summarize the inputs, outputs and txid, and separate structural findings from
+anything that would require chain verification.
+```
 
-## Optional groups — same install, default disabled
+Replace the example with your supplied transaction hex. Never include wallet secrets, private keys or seed phrases.
 
-Explicit operator configuration under the chosen profile's native plugin settings:
+## How it works
+
+```text
+Approved supplied input
+        |
+        v
+Hermes agent + task skill
+        |
+        v
+Native bsv toolset -> input validation -> offline operation
+        |
+        v
+JSON result + evidence limitations
+        |
+        v
+Agent explains the result; operator decides what happens next
+```
+
+The plugin has one native root, one `bsv` toolset and one Python distribution. Six tools register by default. Optional kits add capabilities without requiring separate plugin installations.
+
+All native handlers return JSON strings using a shared envelope:
+
+```json
+{"ok": true, "result": {}}
+```
+
+Failures use `{"ok":false,"error":{"code":"invalid_input","message":"..."}}`; successful responses may include warnings. **Execution success is not comparison success.** A comparison inside `result` can be false even when `ok` is true. Exact contracts are in [CONTRACT.md](docs/CONTRACT.md).
+
+## What you can do
+
+| Task | Default tool | What it returns |
+| --- | --- | --- |
+| Discover this installation | `bsv_capabilities` | Actual registered tools and enabled kits |
+| Inspect a transaction | `bsv_inspect_transaction` | Bounded legacy transaction structure and txid |
+| Read Script bytes | `bsv_inspect_script` | Inert disassembly; no execution |
+| Plan a text commitment | `bsv_plan_commitment` | SHA-256 digest and unsigned OP_RETURN script plan |
+| Commit supplied SOUL content | `bsv_identity_soul` | Versioned commitment or receipt comparison for exact supplied bytes |
+| Make a work-product receipt | `bsv_assurance_artifact` | Digest receipt from supplied digest/byte-count records |
+
+For example, tool arguments for a text plan are `{"text":"hello"}`. A SOUL commitment accepts `{"data_b64":"aGVsbG8=","network":"testnet"}`. These are intentionally different commitment formats; matching text does not make their receipts interchangeable.
+
+The `network` field binds a receipt's declared context. It does not create a network connection or submit a transaction.
+
+### Guided workflows
+
+The installation includes three task skills:
+
+- `bsv-hermes:inspect-evidence` — inspect bytes and distinguish local findings from unchecked claims.
+- `bsv-hermes:plan-commitment` — prepare commitments without signing or publishing.
+- `bsv-hermes:audit-workproducts` — work with supplied work-product and deployment evidence.
+
+Discover them with `skills_list`, then load the selected skill with `skill_view`.
+
+## Optional kits
+
+Enable any subset through your chosen profile's native plugin settings:
 
 ```yaml
 plugins:
@@ -59,43 +137,100 @@ plugins:
         enabled_kits: [identity, assurance, integrations]
 ```
 
-Choose any subset; unknown/duplicate values reject registration. Restart to apply. This repository never writes that setting itself.
+Review configuration changes yourself and restart to apply. The repository never writes this setting automatically. Unknown or duplicate kit names reject registration.
 
-- **identity**: `bsv_identity_instructions`, `bsv_identity_posture`, `bsv_identity_release` (three additional tools).
-- **assurance**: `bsv_assurance_tool_chain`, `bsv_assurance_deployment_gate`, `bsv_assurance_approval_intent` (three additional tools, strictly advisory).
-- **integrations**: `bsv_int_batch`, `bsv_int_verify_batch`, `bsv_int_content`, `bsv_int_overlay`, `bsv_int_handoff`, `bsv_int_chain`, `bsv_int_reconcile` (seven additional tools, all offline).
+| Kit | Additional tools | Focus |
+| --- | --- | --- |
+| Identity | `bsv_identity_instructions`, `bsv_identity_posture`, `bsv_identity_release` | Supplied instruction, posture and release commitments |
+| Assurance | `bsv_assurance_tool_chain`, `bsv_assurance_deployment_gate`, `bsv_assurance_approval_intent` | Evidence chains and advisory deployment/approval checks |
+| Integrations | `bsv_int_batch`, `bsv_int_verify_batch`, `bsv_int_content`, `bsv_int_overlay`, `bsv_int_handoff`, `bsv_int_chain`, `bsv_int_reconcile` | Offline batches, content and handoff/reconciliation workflows |
 
-With all groups there are 19 tools, still one toolset. Doctor's fresh sandbox checks the six default declarations; the native smoke additionally loads all groups through real synthetic profile configuration and dispatches all 19. Public-chain transport, newer proof/UHRP codec/quote/scaffold/index packs and visual builders are **staged elsewhere, not shipped or registered here**.
+All kits enabled gives **19 tools in one toolset**. No kit adds authenticated human authorization, network transport or spending powers.
 
-## Three task skills
+Public-chain transport, newer protocol packs and dashboard/visual builders are not included in this version. Separate development candidates are not shipped capabilities.
 
-Use `skills_list`, then `skill_view` with `bsv-hermes:inspect-evidence`, `bsv-hermes:plan-commitment`, or `bsv-hermes:audit-workproducts`. They cover optional capabilities without adding per-tool skill clutter.
+## Privacy and evidence
 
-## Privacy and evidence boundaries
+**A digest match is a narrow result—not a trust score.** Parsing, hashing and branch arithmetic do not establish authorship, consent, complete logging, execution truth, PoW, selected-chain membership, SPV, finality or deployment safety. Approval-intent tokens are not authenticated authorization; a caller can mint a matching token.
 
-Native arguments are visible to the host and may enter host logs. Supply only approved nonsecret projections. Deterministic text/SOUL commitments permit guessing. Assurance and integration nonces remain caller-retained and are omitted from native results, but cannot be hidden from the invoking host.
+Supply only approved, nonsecret projections. Native arguments are visible to Hermes and may enter host logs or the model provider's context. Local computation does not make the surrounding agent session private.
 
-Batch proofs are omitted by default. `export_private_proofs: true` explicitly returns them for **private local use**. Root salting does not hide proof siblings: low-entropy leaf guesses and correlation remain possible. Publish only the final commitment when hiding is required, with separate approval. No v1 hash algorithm changed to enforce this safer output boundary.
+Deterministic commitments to low-entropy text permit guessing. Nonces are caller-retained and omitted from native results, but remain visible to the invoking host. Batch proofs are omitted by default; `export_private_proofs: true` returns them for explicit **private local use**. Salting the root does not conceal deterministic proof siblings or prevent correlation. When hiding is required, publish only the final commitment with separate approval—not the proofs.
 
-Parsing, digest equality, branch arithmetic, provider labels and supplied timestamps do not establish authorship, human consent, complete logging, execution truth, selected-chain membership, PoW, SPV, finality, spendability or deployment safety. A caller can mint a matching approval token; no authenticated authorization exists. [Contracts and exact formats](docs/CONTRACT.md) · [Security](SECURITY.md) · [Provenance](PROVENANCE.md).
+See [Security](SECURITY.md), [exact formats](docs/CONTRACT.md) and [provenance](PROVENANCE.md).
+
+## FAQ
+
+<details>
+<summary><strong>Do I need a wallet or BSV funds?</strong></summary>
+
+No. Every shipped tool runs offline. Commitment plans are unsigned and unsubmitted; nothing pays fees or broadcasts.
+
+</details>
+
+<details>
+<summary><strong>Does it hash my real SOUL.md automatically?</strong></summary>
+
+No. Supply approved bytes explicitly. The plugin does not discover files or read your agent's private configuration.
+
+</details>
+
+<details>
+<summary><strong>Does a matching receipt prove the work happened?</strong></summary>
+
+No. It establishes the particular local comparison described by that tool. It does not authenticate the source, prove execution or verify a blockchain inclusion claim.
+
+</details>
+
+<details>
+<summary><strong>Can I use this as an MCP server?</strong></summary>
+
+This version is a Hermes-native directory plugin. An MCP server is not shipped. The wheel exposes the Python library, not automatic native discovery.
+
+</details>
+
+<details>
+<summary><strong>How do I update?</strong></summary>
+
+The local installer refuses an existing target and has no force flag. Review the new source and plan a separate removal/migration before reinstalling. There is no automatic updater in this version.
+
+</details>
 
 ## Verify and develop
+
+Run the offline tests and verify the source inventory:
 
 ```sh
 python -m unittest discover -s tests -v
 python scripts/update_manifest.py --check
 ```
 
-The host-independent suite explicitly skips its one native-host test if Hermes dependencies are absent; that is not native acceptance. For the complete native smoke, use the Python environment of an installed compatible Hermes host:
+Without Hermes host dependencies, the suite explicitly skips one native-host test. That is not native acceptance. For real Doctor, PluginContext, scoped dispatch and installed-skill checks, use your compatible Hermes host's Python environment:
 
 ```sh
 python scripts/native_smoke.py .
 ```
 
-That command exercises real Doctor, PluginContext, scoped `registry.dispatch`, six defaults, all optional groups and three readable registered skills in temporary homes with socket connections blocked. It never enables the live profile. With already-installed trusted setuptools >=77, build without dependency downloads:
+For a source-checkout Hermes environment, ensure the Hermes checkout is importable as well as its dependencies—for example, set `PYTHONPATH=/absolute/path/to/hermes-agent` when invoking that environment's Python. This prevents missing host-module errors such as `hermes_yaml`.
+
+The native smoke uses temporary homes, exercises the six defaults and all optional groups, checks three registered skill paths and blocks socket connections. It does not enable your live profile.
+
+With trusted setuptools >=77 already installed, build without dependency downloads:
 
 ```sh
 python -c "from setuptools.build_meta import build_wheel, build_sdist; print(build_wheel('dist')); print(build_sdist('dist'))"
 ```
 
-Regenerate `SOURCE-MANIFEST.json` with `python scripts/update_manifest.py` only after reviewed source changes. Hashes detect corruption, not author authenticity. Final acceptance must repeat installation and native smoke on the extracted archive outside the checkout. See [verification](docs/VERIFICATION.md).
+Regenerate the source manifest only after reviewed changes. Inventory hashes detect corruption, not author authenticity. Final distribution acceptance should repeat installation and native checks on an extracted archive outside the checkout. See [verification instructions](docs/VERIFICATION.md).
+
+## Documentation
+
+- [Result contracts and formats](docs/CONTRACT.md)
+- [Verification and packaging](docs/VERIFICATION.md)
+- [Security boundaries](SECURITY.md)
+- [Source provenance](PROVENANCE.md) and [third-party policy](THIRD_PARTY.md)
+- [Contributing](CONTRIBUTING.md)
+
+## License and status
+
+The repository is an experimental engineering candidate, not a certified security product. Public licensing remains pending operator selection; no MIT or other open-source license is implied. Read [LICENSE-POLICY.md](LICENSE-POLICY.md) before redistribution.
