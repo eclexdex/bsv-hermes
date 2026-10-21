@@ -1,0 +1,11 @@
+include __init__.py plugin.yaml README.md SECURITY.md CONTRIBUTING.md LICENSE-POLICY.md PROVENANCE.md THIRD_PARTY.md SOURCE-MANIFEST.json .gitignore
+recursive-include bsv_hermes *.py *.md
+recursive-include tests *.py *.json
+recursive-include docs *.md
+recursive-include examples *.json
+recursive-include scripts *.py
+recursive-include .github *.yml
+prune local-verification
+prune build
+prune dist
+global-exclude *.pyc __pycache__ .DS_Store

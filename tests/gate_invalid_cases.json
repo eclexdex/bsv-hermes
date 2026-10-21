@@ -1,0 +1,2135 @@
+[
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "nested_unknown:('evidence', 'artifact')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2",
+          "unexpected": "SYNTHETIC_PRIVACY_CANARY_73d2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "4092c16030a06ae60c11832dadcea0d56d8866106d56ddd57496689d5ffb53a5",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "nested_unknown:('evidence', 'artifact', 'projection')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "unexpected": "SYNTHETIC_PRIVACY_CANARY_73d2"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "1ffeba32c92201fca4664ab9ab8cbf19ac0d4c9ceab01cc762eaa35c54446b09",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "nested_unknown:('evidence', 'artifact', 'projection', 'items', 0)",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3,
+                "unexpected": "SYNTHETIC_PRIVACY_CANARY_73d2"
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "08b83a4e3317336970be088fbf3fc3b5effd234c40ef8163a72a197c0f47f789",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'artifact', 'projection', 'items', 0, 'digest')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": {
+                  "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+                },
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "082b4dbb8dbf0826781fd5587deff1afe0fee6be84106c3e7dcd0adb82056ede",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'artifact', 'projection', 'items', 0, 'bytes'):True",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": true
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "993e747ec4c780cf5482e3d05d455f41213946b6dbe041708b57fc0f3eb45b8e",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'artifact', 'projection', 'items', 0, 'bytes'):False",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": false
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "fc58bf957d650d6924b0a6871515eb79e2e9e496977220b6884c2989ba1369c9",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'artifact', 'projection', 'items', 0, 'bytes'):1.5",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 1.5
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "6eb910defc0ba95146c3dc94f5b7107f6e7e420d09b106490b443c27d5c9a72c",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'artifact', 'projection', 'items', 0, 'bytes'):-1",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": -1
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "5f80da73720dc067d392ef0f3cc990972af8cc6b5e3bdc8cc427c3639b1d7a27",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'artifact', 'projection', 'items', 0, 'bytes'):9007199254740992",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 9007199254740992
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "0a04926cd8924810c6a3da79a3274c40ce40e63299f96f80b5cb4090fd40d340",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'artifact', 'projection', 'nonce')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": {
+              "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+            }
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "3c328ac180c01e1d02682140ad9caaacb8f8bc9e6c0b544f35177cc059fbaa5d",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": false
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'artifact', 'digest')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": {
+            "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+          }
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "93d93fd1031f96ab3f316b15728810983867b512ea38e6a02c654ef2ca73f71e",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "nested_unknown:('evidence', 'chain')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0,
+          "unexpected": "SYNTHETIC_PRIVACY_CANARY_73d2"
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "0c7474e99b9a41442c0af09f6ec85e2a22980d52ebdb1275aa01f9cd4a42f2ae",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "nested_unknown:('evidence', 'chain', 'projection')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "unexpected": "SYNTHETIC_PRIVACY_CANARY_73d2"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "bc1d2e22fb30fb13dd4a1095b1bb516ded46f52b474418d7344e8b0fbd178012",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "nested_unknown:('evidence', 'chain', 'projection', 'events', 0)",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending",
+                "unexpected": "SYNTHETIC_PRIVACY_CANARY_73d2"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "ae8c1bc3d98029e902984a405374162a62d220b6d1b84cdfb8d4fc6cf4ab9124",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'chain', 'projection', 'events', 0, 'call_digest')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": {
+                  "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+                },
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "ba880d5404ec9e8a8deac1d7c9794a18e19aad2b3b093635e900fd51d236f7eb",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "nested_unknown:('evidence', 'chain', 'projection', 'events', 1)",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok",
+                "unexpected": "SYNTHETIC_PRIVACY_CANARY_73d2"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "e67f9b3e78eae78ce3806ae903b9b63cbeb965ba5d3d02e06045237c3155c433",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'chain', 'projection', 'events', 1, 'call_digest')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": {
+                  "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+                },
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "48a91be79e97e02e2123bc0c016554b97e18271764b5855b86933ab05c95c1e1",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'chain', 'projection', 'nonce')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": {
+              "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+            }
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "c110a21eeb66b37dd51b1e777b0e03c5be118d2c2b7488c56ea6333a461c8be6",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'chain', 'digest')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": {
+            "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+          },
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "6639073bc13e9ec54bbacb104e3a576c47a08c942fff8ecf7e5c0fc073f22a91",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'chain', 'links', 0)",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            {
+              "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+            },
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "55eaf27a1c08c2bc11f0c45a6fd47fe2f1d3680936b824032f809c5751dd14ce",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'chain', 'links', 1)",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            {
+              "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+            }
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "fdd21bd3460e5782bdf1fcc1ee17fbeb8d0d6918f1783685722fe133090acfe2",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "string_as_object:('evidence', 'chain', 'head')",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": {
+            "secret": "SYNTHETIC_PRIVACY_CANARY_73d2"
+          },
+          "pending_count": 0
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "7e19a9e40ea9375d9fde6d3eda8db345126b352ab454a4405036f11c38413e3d",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'chain', 'pending_count'):True",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": true
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "7f7a6bab5e8088c11968705ae8fb68542b645e326cc10a34536fee643df1d731",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'chain', 'pending_count'):False",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": false
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "9bbed03c18e50a98cd792965f58e3e9aa615903af52654dfc53526c29c043324",
+        "complete": true,
+        "deployment_safety": "not_certified",
+        "evidence_ready": true,
+        "fresh_supplied_timestamp": true,
+        "integrity": true,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'chain', 'pending_count'):1.5",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 1.5
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "67dd38408dcd58ee572d69ca504787ca43c59ce107ea8a986f97d981c9cca2e4",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'chain', 'pending_count'):-1",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": -1
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "723805b37303d908d3f07e52b5ceb627c54a66ec135ca782e5a100a2951911fc",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  },
+  {
+    "tool": "bsv_assurance_deployment_gate",
+    "case": "integer:('evidence', 'chain', 'pending_count'):9007199254740992",
+    "input": {
+      "evidence": {
+        "network": "testnet",
+        "artifact": {
+          "version": 1,
+          "kind": "artifact",
+          "projection": {
+            "network": "testnet",
+            "items": [
+              {
+                "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "bytes": 3
+              }
+            ],
+            "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "digest": "fe1d0dfbb72f594fa183ee0989bd633060e0e9a64f66230d3f83f561870acbf2"
+        },
+        "chain": {
+          "version": 1,
+          "kind": "tool-chain",
+          "projection": {
+            "network": "testnet",
+            "events": [
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "attempt",
+                "outcome": "pending"
+              },
+              {
+                "call_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "phase": "terminal",
+                "outcome": "ok"
+              }
+            ],
+            "nonce": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          "digest": "de595e64748bcc07b7887756298b9959f7c9d6cf9e9a6e641719a1884998d6af",
+          "links": [
+            "02fab3b61b40a8be0bfe658e0f8e6f396554c3b07fddc3ec44923d5e017322df",
+            "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6"
+          ],
+          "head": "7620b862334bb642c58d823111b670325310b591168c7fa56c7140f98bebd2a6",
+          "pending_count": 9007199254740992
+        },
+        "required_digests": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "max_age": 30,
+        "observed_at": 100,
+        "now": 110
+      }
+    },
+    "schema_valid": false,
+    "json_serializable": true,
+    "return_type": "str",
+    "ok": true,
+    "result": {
+      "data": {
+        "bundle_digest": "8c1ab10c872a411cf3c1920ba81c7cc753cea571efab41dd56e000d20eb5f885",
+        "complete": false,
+        "deployment_safety": "not_certified",
+        "evidence_ready": false,
+        "fresh_supplied_timestamp": true,
+        "integrity": false,
+        "mode": "advisory_only",
+        "network_matches": true
+      },
+      "ok": true,
+      "warnings": [
+        "Offline supplied evidence only; not execution truth, consent, or chain finality."
+      ]
+    },
+    "privacy_canary_echo": false
+  }
+]

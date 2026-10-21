@@ -1,0 +1,19 @@
+name: bsv-hermes
+version: "0.2.0"
+description: "Offline supplied-evidence inspection and commitments. No custody, network or publication."
+# Default surface. Optional tools are selected through enabled_kits, not separate plugins.
+provides_tools:
+  - bsv_capabilities
+  - bsv_inspect_transaction
+  - bsv_inspect_script
+  - bsv_plan_commitment
+  - bsv_identity_soul
+  - bsv_assurance_artifact
+provides_hooks: []
+requires_env: []
+capabilities: []
+config_schema:
+  enabled_kits:
+    type: array
+    default: []
+    description: "Explicit offline groups: identity, assurance, integrations. Unknown or duplicate values reject loading."

@@ -1,0 +1,6 @@
+{
+  "capabilities": {"tool": "bsv_capabilities", "arguments": {}},
+  "script": {"tool": "bsv_inspect_script", "arguments": {"script_hex": "006a0141", "max_items": 20}},
+  "commitment": {"tool": "bsv_plan_commitment", "arguments": {"text": "hello"}},
+  "transaction": {"tool": "bsv_inspect_transaction", "arguments": {"transaction_hex": "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff00ffffffff01e803000000000000015100000000"}}
+}
