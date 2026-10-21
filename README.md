@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/images/hermes-bsv-ledger.png" alt="Hermes holding a BSV coin, surrounded by connected ledger blocks" width="960" />
+
 # BSV Hermes
 
 ### One native toolset for inspecting BSV data and creating agent evidence commitments.
@@ -148,6 +150,22 @@ Review configuration changes yourself and restart to apply. The repository never
 All kits enabled gives **19 tools in one toolset**. No kit adds authenticated human authorization, network transport or spending powers.
 
 Public-chain transport, newer protocol packs and dashboard/visual builders are not included in this version. Separate development candidates are not shipped capabilities.
+
+## Dashboard preview
+
+The separate OPS dashboard candidate presents supplied agent snapshots and receipt queues. These screenshots use synthetic fixtures, not live fleet data. The dashboard is a development preview and is **not bundled with the v0.2.0 plugin**.
+
+### Desktop operations view
+
+![OPS dashboard desktop preview showing synthetic agent states, receipt queues and unchecked evidence layers](docs/images/ops-dashboard-desktop.png)
+
+Receipt-first navigation keeps supplied evidence flags, stale timestamps and unknown states visible. The display does not turn supplied claims into cryptographic verification.
+
+### Mobile operations view
+
+<img src="docs/images/ops-dashboard-mobile.png" alt="Mobile OPS dashboard preview with synthetic fixture labels, receipt filters and offline evidence warnings" width="390" />
+
+The narrow layout brings the receipt queue forward and retains the same offline and unverified-evidence labels. Screenshots illustrate the candidate interface; they are not proof of live collection or chain verification.
 
 ## Privacy and evidence
 
