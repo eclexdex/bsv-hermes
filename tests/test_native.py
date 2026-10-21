@@ -18,7 +18,7 @@ class NativeHarnessTests(unittest.TestCase):
         receipt = json.loads(result.stdout)
         self.assertEqual(len(receipt['registered_tools']), 6)
         self.assertEqual(len(receipt['registered_skills']), 3)
-        self.assertEqual(len(receipt['optional']['registered_tools']), 19)
+        self.assertEqual(len(receipt['optional']['registered_tools']), 20)
         self.assertTrue(receipt['optional']['config_readback'])
         self.assertEqual(receipt['dispatch_api'], 'registry.dispatch')
         self.assertTrue(all(item['ok'] for item in receipt['handler_results'].values()))

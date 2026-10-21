@@ -1,5 +1,5 @@
 name: bsv-hermes
-version: "0.3.0rc1"
+version: "0.3.0rc2"
 description: "Offline evidence defaults; opt-in, separately authorized mainnet digest publication."
 # Default surface. Optional tools are selected through enabled_kits, not separate plugins.
 provides_tools:

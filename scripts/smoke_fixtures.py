@@ -26,6 +26,7 @@ def cases():
         'bsv_plan_commitment':{'text':''},
         'bsv_identity_soul':{'data_b64':'c3ludGhldGlj','network':'testnet'},
         'bsv_assurance_artifact':{'evidence':artifact},
+        'bsv_assurance_run':{'run_id':'synthetic', 'instruction':{'id':'instruction','bytes_b64':'YWJj'}, 'approved_inputs':[], 'tools':[], 'final_output':{'id':'output','bytes_b64':''}},
         'bsv_identity_instructions':{'entries':[{'path':'SKILL.md','data_b64':'YQ=='}],'network':'testnet'},
         'bsv_identity_release':{'entries':[{'path':'plugin.yaml','data_b64':'YQ=='}],'network':'testnet'},
         'bsv_identity_posture':{'fields':{'hermes_version':'0.9.0','approval_mode':'required','network_access':'disabled','max_iterations':10,'telemetry_enabled':False},'network':'testnet'},

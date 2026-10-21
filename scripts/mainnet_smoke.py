@@ -107,7 +107,14 @@ main(factory)
                     return value['result']
                 call('bsv_wallet_address', {})
                 call('bsv_funding_status', {})
-                quote = call('bsv_publish_prepare', {'workflow_id': 'native', 'text': 'synthetic never funded'})
+                from bsv_hermes.receipts.producer import build_run
+                from bsv_hermes.receipts.evidence import build_batch
+                bundle = build_run({'run_id':'synthetic', 'instruction':{'id':'instruction','bytes_b64':'YWJj'},
+                    'approved_inputs':[], 'tools':[], 'final_output':{'id':'output','bytes_b64':''}})['bundle']
+                batch = build_batch([('synthetic',bundle)], nonces=['01'*32], workflow_id='native')
+                request = batch['publication_request']
+                quote = call('bsv_publish_prepare', request['arguments'])
+                assert quote['digest_hex'] == request['expected_text_sha256']
                 cli('approve-sign', '--directory', runtime, '--authority-directory', authority,
                     '--workflow-id', 'native', '--expected-digest', quote['signing_digest'], '--max-cost-sat', '150')
                 signed = call('bsv_publish_sign', {'workflow_id': 'native'})
@@ -136,7 +143,8 @@ main(factory)
                       'actual_dispatch': 'registry.dispatch', 'sdk_worker': 'real isolated subprocess; trusted loopback adapters only',
                       'added_tools_valid_dispatch': len(OPERATIONS), 'invalid_dispatches': invalid_count,
                       'local_posts': provider.posts, 'public_posts': 0, 'mainnet_spent_sat': 0,
-                      'txid': receipt['txid'], 'receipt': receipt, 'results': results, 'commands': commands}
+                      'txid': receipt['txid'], 'receipt': receipt, 'results': results, 'commands': commands,
+                      'batch_publication_request': request, 'receipt_batch': batch['manifest']}
         finally:
             provider.close()
     print(json.dumps(result, indent=2))

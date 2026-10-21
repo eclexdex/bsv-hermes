@@ -1,5 +1,7 @@
 import importlib
 import unittest
+from pathlib import Path
+import bsv_hermes.mainnet
 
 
 class MainnetComponents(unittest.TestCase):
@@ -8,5 +10,5 @@ class MainnetComponents(unittest.TestCase):
         for name in names:
             with self.subTest(name=name):
                 module = importlib.import_module('bsv_hermes.mainnet.' + name)
-                self.assertIn('bsv_hermes/mainnet/', module.__file__)
-                self.assertNotIn('toolkit-recon', module.__file__)
+                expected = Path(bsv_hermes.mainnet.__file__).resolve().parent
+                self.assertTrue(Path(module.__file__).resolve().is_relative_to(expected))

@@ -2,12 +2,16 @@
 
 Use an application-owned private directory. This is not a hostile-directory
 sandbox or a spend-budget ledger. Keep one shared journal for all callers.
+The live instance pins one SQLite connection and never reopens its pathname.
+Identity checks detect replacement but are NOT a hostile-filesystem race proof:
+initial SQLite open and its auxiliary files still require a trusted directory.
 """
 from contextlib import contextmanager
 import os
 from pathlib import Path
 import sqlite3
 import stat
+import threading
 import time
 
 
@@ -17,35 +21,63 @@ class JournalError(RuntimeError):
 
 class Journal:
     def __init__(self, path):
-        self.path = Path(path)
+        self.path = Path(os.path.abspath(path))
+        self._db = None
+        self._lock = threading.RLock()
         try:
-            fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_RDWR | os.O_NOFOLLOW, 0o600)
         except FileExistsError:
-            info = self.path.lstat()
-            if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
-                raise JournalError('journal must be a regular private file')
-            if info.st_mode & 0o077:
-                raise JournalError('journal permissions must be private')
+            pass
         else:
             os.close(fd)
+        # Do not keep an extra OS fd for the database: closing it can release
+        # SQLite's process-wide POSIX locks held by another live connection.
+        # Only SQLite owns persistent database descriptors. Initial opening is
+        # explicitly inside the trusted-directory boundary, not a race sandbox.
+        info = self.path.lstat()
+        self._identity = (info.st_dev, info.st_ino)
         try:
+            self._check_identity()
+            # Pin the live SQLite connection; never reopen a replacement pathname.
+            self._db = sqlite3.connect(str(self.path), timeout=0.2, check_same_thread=False)
+            self._db.row_factory = sqlite3.Row
             with self._connect() as db:
                 db.execute('CREATE TABLE IF NOT EXISTS attempts ('
                            'network TEXT NOT NULL, txid TEXT NOT NULL, provider TEXT NOT NULL, '
                            'attempts INTEGER NOT NULL, state TEXT NOT NULL, lease_until REAL NOT NULL, '
                            'PRIMARY KEY(network, txid))')
-        except sqlite3.Error:
+        except (sqlite3.Error, JournalError):
+            self.close()
             raise JournalError('journal unavailable') from None
+
+    def _check_identity(self):
+        try:
+            info = self.path.lstat()
+            if (not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or
+                    info.st_mode & 0o077 or (info.st_dev, info.st_ino) != self._identity):
+                raise JournalError('journal identity or permissions changed')
+        except OSError:
+            raise JournalError('journal unavailable') from None
+
+    def close(self):
+        with self._lock:
+            if self._db is not None:
+                self._db.close()
+                self._db = None
+
+
+    def __del__(self):
+        if hasattr(self, '_lock'):
+            self.close()
 
     @contextmanager
     def _connect(self):
-        db = sqlite3.connect(str(self.path), timeout=0.2)
-        db.row_factory = sqlite3.Row
-        try:
-            with db:
-                yield db
-        finally:
-            db.close()
+        with self._lock:
+            self._check_identity()
+            if self._db is None:
+                raise JournalError('journal closed')
+            with self._db:
+                yield self._db
 
     def get(self, network, txid):
         try:

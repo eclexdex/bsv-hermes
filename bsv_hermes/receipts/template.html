@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><title>Receipt evidence viewer</title><style>
+:root{font-family:system-ui,sans-serif;color:#172c3b;background:#eef2f4;line-height:1.5}*{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:auto;padding:32px 24px}h1{font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.15;margin:8px 0 16px}h2{font-size:1.15rem;margin:0}.eyebrow{letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;font-weight:700;color:#425e70}.notice{border-left:4px solid #8e5b00;padding:12px 16px;background:#fff5dc;margin:20px 0}.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0}button,.filelabel,summary{min-height:44px;padding:10px 14px;cursor:pointer}button,.filelabel{background:#183e54;color:white;border:0;border-radius:6px;font:inherit}input[type=file]{max-width:100%;min-height:44px}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #996000;outline-offset:3px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid #c6d2d9;border-radius:10px;padding:20px;min-width:0}.status{display:inline-block;border-radius:4px;background:#edf1f4;padding:3px 9px;margin:12px 0;font-weight:700}.mismatch{background:#ffe4e4;color:#801c1c}.match{background:#e2f0ec;color:#174e40}.missing{background:#fff0ce;color:#654300}p{overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.86rem;max-height:320px;overflow:auto;background:#f0f3f5;padding:12px}details{margin-top:8px}summary{padding-left:0;color:#244c65}#message{min-height:24px;font-weight:600}footer{margin:28px 0;color:#435966}#source{font-weight:600}a{color:inherit}@media(max-width:600px){main{padding:24px 16px}.grid{grid-template-columns:1fr}.card{padding:16px}}@media print{.controls{display:none}.grid{display:block}.card{break-inside:avoid;margin-bottom:12px}}
+</style></head><body><main><div class="eyebrow">Offline / evidence inspection</div><h1>Receipt evidence viewer</h1><p>Six independent dimensions. No overall verification badge.</p><div class="notice">This viewer displays imported claims, not verification results it computed. Matching hashes do not prove execution, consent, identity, or chain inclusion. No signed events means unverified execution source.</div><p id="source"></p><div class="controls"><label for="import">Import report or bundle (JSON, ≤1 MiB)</label><input id="import" type="file" accept=".json,application/json"><button id="reset" type="button">Reset view</button></div><p id="message" role="status" aria-live="polite"></p><section class="grid" id="results" aria-label="Independent evidence dimensions"></section><details><summary>Full imported evidence (inert text)</summary><pre id="raw"></pre></details><footer>No remote requests, telemetry, wallet, or signing. Keys bundled with evidence are not trusted by this viewer. Signature checks require an external verifier and caller-selected trusted key; crypto is not available here.</footer></main><script>
+'use strict';
+const initial=/*INITIAL_DATA*/{};
+const dimensions=['artifact','chain','signature','batch','publication','inclusion'];
+const titles={artifact:'Artifact bytes',chain:'Evidence chain',signature:'Signature / trusted key',batch:'Batch membership',publication:'Publication status',inclusion:'Chain inclusion'};
+const allowed=new Set(['match','mismatch','missing','unchecked']);
+// Recursive-descent JSON parser: JSON.parse alone silently accepts duplicate keys.
+function strictJSON(text){
+ if(new TextEncoder().encode(text).length>1048576)throw Error('Import exceeds 1 MiB');
+ let i=0,nodes=0;const ws=()=>{while(/[\x20\t\r\n]/.test(text[i]||'!'))i++};
+ function string(){const start=i++;while(i<text.length){const c=text[i++];if(c==='"')return JSON.parse(text.slice(start,i));if(c==='\\')i++;}throw Error('Unterminated string');}
+ function value(depth){if(++nodes>20000||depth>40)throw Error('Structure exceeds depth/node budget');ws();let c=text[i];
+ if(c==='"')return string();
+ if(c==='{'){i++;const out=Object.create(null),keys=new Set();ws();if(text[i]==='}'){i++;return out}while(true){ws();if(text[i]!=='"')throw Error('Expected object key');const key=string();if(keys.has(key))throw Error('Duplicate JSON key: '+key);keys.add(key);ws();if(text[i++]!==':')throw Error('Expected colon');out[key]=value(depth+1);ws();c=text[i++];if(c==='}')return out;if(c!==',')throw Error('Expected comma');}}
+ if(c==='['){i++;const out=[];ws();if(text[i]===']'){i++;return out}while(true){out.push(value(depth+1));ws();c=text[i++];if(c===']')return out;if(c!==',')throw Error('Expected comma');}}
+ const m=text.slice(i).match(/^(?:true|false|null|-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)/);if(!m)throw Error('Invalid JSON value');i+=m[0].length;const v=JSON.parse(m[0]);if(typeof v==='number'&&!Number.isFinite(v))throw Error('Nonfinite number');return v;
+ }
+ const result=value(0);ws();if(i!==text.length)throw Error('Trailing JSON data');if(!result||typeof result!=='object'||Array.isArray(result))throw Error('Expected JSON object');return result;
+}
+function node(tag,text){const e=document.createElement(tag);e.textContent=text;return e}
+function render(data){
+ const root=document.getElementById('results');root.replaceChildren();
+ document.getElementById('source').textContent='Source label (imported, unauthenticated): '+(typeof data.source_label==='string'?data.source_label:'Unspecified / unverified source');
+ const report=data.report&&typeof data.report==='object'?data.report:data;
+ const results=report.results&&typeof report.results==='object'?report.results:{};
+ for(const key of dimensions){const item=Object.hasOwn(results,key)?results[key]:null;const valid=item&&typeof item==='object'&&!Array.isArray(item);const state=valid&&allowed.has(item.status)?item.status:item===null?'missing':'unchecked';
+ const card=node('article','');card.className='card';card.append(node('h2',titles[key]));const badge=node('div',state.toUpperCase()+' · imported claim');badge.className='status '+state;card.append(badge);
+ card.append(node('p',item===null?'No result supplied. This dimension was not established.':valid&&typeof item.reason==='string'?item.reason:valid&&typeof item.detail==='string'?item.detail:'No supported explanation supplied. Unsupported status remains unchecked.'));
+ const detail=node('details','');detail.append(node('summary','Inspect evidence / missing inputs'));detail.append(node('pre',item===null?'Missing result: '+key+'\nSupply an external verifier result with explicit evidence and trust inputs.':JSON.stringify(item,null,2)));card.append(detail);root.append(card);}
+ document.getElementById('raw').textContent=JSON.stringify(data,null,2);
+}
+render(initial);
+document.getElementById('import').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>1048576)throw Error('Import exceeds 1 MiB');const data=strictJSON(await file.text());render(data);document.getElementById('message').textContent='Imported locally. Claims are unauthenticated; no verification was run.';}catch(error){document.getElementById('message').textContent='Import rejected: '+error.message;}event.target.value='';});
+document.getElementById('reset').addEventListener('click',()=>{render({});document.getElementById('message').textContent='Reset. All results missing.'});
+</script></body></html>

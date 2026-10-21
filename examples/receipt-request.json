@@ -1,0 +1,7 @@
+{
+  "run_id": "synthetic-offline-example",
+  "instruction": {"id": "instruction", "bytes_b64": "YWJj"},
+  "approved_inputs": [],
+  "tools": [],
+  "final_output": {"id": "output", "bytes_b64": ""}
+}

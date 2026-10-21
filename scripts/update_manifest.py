@@ -8,7 +8,7 @@ from install_local import read_regular
 ROOT_FILES = ('__init__.py','plugin.yaml','pyproject.toml','MANIFEST.in','.gitignore',
               'README.md','SECURITY.md','CONTRIBUTING.md','LICENSE-POLICY.md','PROVENANCE.md','THIRD_PARTY.md')
 DIRECTORIES = ('bsv_hermes','scripts','tests','docs','examples','.github')
-SUFFIXES = {'.py','.md','.json','.yaml','.yml','.toml','.png','.txt'}
+SUFFIXES = {'.py','.md','.json','.yaml','.yml','.toml','.png','.txt','.html','.sha256'}
 
 
 def create(root):

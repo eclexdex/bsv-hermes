@@ -1,8 +1,8 @@
 include __init__.py plugin.yaml README.md SECURITY.md CONTRIBUTING.md LICENSE-POLICY.md PROVENANCE.md THIRD_PARTY.md SOURCE-MANIFEST.json .gitignore
-recursive-include bsv_hermes *.py *.md *.txt
-recursive-include tests *.py *.json
-recursive-include docs *.md *.png
-recursive-include examples *.json
+recursive-include bsv_hermes *.py *.md *.txt *.html
+recursive-include tests *.py *.json *.txt *.sha256
+recursive-include docs *.md *.png *.json
+recursive-include examples *.json *.txt
 recursive-include scripts *.py
 recursive-include .github *.yml
 prune local-verification

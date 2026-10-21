@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bsv-hermes"
-version = "0.3.0rc1"
+version = "0.3.0rc2"
 description = "Offline BSV evidence tools with separately approved mainnet digest publication for Hermes"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -13,6 +13,11 @@ license-files = []
 
 [project.optional-dependencies]
 mainnet = ["bsv-sdk==2.4.0", "cryptography==48.0.0"]
+receipt-signature = ["cryptography==48.0.0"]
+
+[project.scripts]
+bsv-receipt = "bsv_hermes.receipts.cli:main"
+bsv-receipt-verify = "bsv_hermes.receipts.cli:verify_main"
 
 [tool.setuptools]
 include-package-data = false
@@ -23,3 +28,4 @@ namespaces = false
 
 [tool.setuptools.package-data]
 bsv_hermes = ["skills/*/SKILL.md", "mainnet/resources/*.md", "mainnet/resources/*.txt"]
+"bsv_hermes.receipts" = ["template.html"]

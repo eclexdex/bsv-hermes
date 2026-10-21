@@ -1,0 +1,55 @@
+{
+  "approved_inputs": [
+    {
+      "name": "input",
+      "sha256": "109a75d97c3487ea5c443fbf929f5d8d0c1c423405ed2e730994504456617567",
+      "size": 11
+    }
+  ],
+  "final_output": {
+    "name": "output",
+    "sha256": "1d40584b4d88e00c05af6c648cdc360b9a21bf9bae67c48487ae65d892bdec66",
+    "size": 22
+  },
+  "instruction": {
+    "name": "instruction",
+    "sha256": "c62d9359fda1a2fbeb7674df88644ef0f08de631b96aeba38d5c3cca6899b965",
+    "size": 22
+  },
+  "receipt_digest": "e0628530590115f7b98d1855670657745bba5a01023694cd47308075ae18babd",
+  "tools": [
+    {
+      "event_digest": "ab0cfbf24343f21c99543924262a4c32a78440af4215f460777df4f16eed7516",
+      "index": 0,
+      "previous": "8cf7cc658bfdb5d2e9ed08ff6be40423ce1ec867044018d85adabe997c8e8701",
+      "request": {
+        "name": "request-0",
+        "sha256": "5041bf1f713df204784353e82f6a4a535931cb64f1f4b4a5aeaffcb720918b22",
+        "size": 7
+      },
+      "response": {
+        "name": "response-0",
+        "sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "size": 1
+      },
+      "tool": "synthetic.increment"
+    },
+    {
+      "event_digest": "d54261ae558785cd84bf416232c8f3c9af7bc57721e621d20309752eeb5c7ea4",
+      "index": 1,
+      "previous": "ab0cfbf24343f21c99543924262a4c32a78440af4215f460777df4f16eed7516",
+      "request": {
+        "name": "request-1",
+        "sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "size": 1
+      },
+      "response": {
+        "name": "response-1",
+        "sha256": "05343e9845302eb730fa9d18ac7b28d5e509893daf1eb76ede8d6e82d47b2da9",
+        "size": 8
+      },
+      "tool": "synthetic.finish"
+    }
+  ],
+  "version": "hermes-receipt/v1"
+}

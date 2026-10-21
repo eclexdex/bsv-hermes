@@ -34,12 +34,20 @@ try:
             if response.headers.get(k) is not None}
         if response.headers.get("content-encoding", "identity").lower() != "identity":
             raise ValueError()
-        length = response.headers.get("content-length")
+        lengths = response.headers.get_all("content-length", [])
+        transfers = response.headers.get_all("transfer-encoding", [])
+        if len(lengths) > 1 or (lengths and transfers):
+            raise ValueError()
+        if transfers and (len(transfers) != 1 or transfers[0].lower().strip() != "chunked"):
+            raise ValueError()
+        length = lengths[0] if lengths else None
         if length is not None and (not length.isdigit() or int(length) > options["max_bytes"]):
             print(json.dumps({"error": "RESOURCE_LIMIT"})); sys.exit(0)
         body = response.read(options["max_bytes"] + 1)
         if len(body) > options["max_bytes"]:
             print(json.dumps({"error": "RESOURCE_LIMIT"})); sys.exit(0)
+        if length is not None and len(body) != int(length):
+            raise ValueError()
         print(json.dumps({"status": response.status, "headers": headers, "body_hex": body.hex()}))
 except (TimeoutError, socket.timeout):
     print(json.dumps({"error": "TIMEOUT"}))

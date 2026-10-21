@@ -42,7 +42,7 @@ class UnifiedTests(unittest.TestCase):
         self.assertEqual(len(ctx.skills), 3)
 
     def test_opt_in_groups_and_actual_capabilities(self):
-        expected = {'identity': 3, 'assurance': 3, 'integrations': 7}
+        expected = {'identity': 3, 'assurance': 4, 'integrations': 7}
         for group, extra in expected.items():
             ctx = Context([group])
             adapter.register(ctx)
@@ -53,7 +53,7 @@ class UnifiedTests(unittest.TestCase):
             self.assertTrue(all(t['toolset']=='bsv' for t in ctx.tools.values()))
         ctx = Context(list(expected))
         adapter.register(ctx)
-        self.assertEqual(len(ctx.tools), 19)
+        self.assertEqual(len(ctx.tools), 20)
         for config in [True, 'identity', ['unknown'], ['identity','identity'], [3]]:
             with self.subTest(config=config), self.assertRaises(ValueError):
                 adapter.register(Context(config))

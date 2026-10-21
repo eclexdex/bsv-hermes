@@ -1,0 +1,76 @@
+{
+  "batch": {
+    "manifest": {
+      "commitment": "69fb04d0f2fb05d4d1195d72cf1b796a3b0be66e529c743dce0c91961a4af793",
+      "count": 3,
+      "network": "mainnet",
+      "odd_node": "duplicate-last",
+      "ordering": "explicit-input-order",
+      "root": "7c2b76beb0c423f5388aa342705ebe15aff710b09177bfe42fcc5ba4e6244b83",
+      "source_status": "unverified-source",
+      "version": "bsv-hermes-receipt-batch/1"
+    },
+    "private_proofs": [
+      {
+        "count": 3,
+        "index": 0,
+        "network": "mainnet",
+        "nonce_hex": "0101010101010101010101010101010101010101010101010101010101010101",
+        "receipt_id": "r1",
+        "receipt_sha256": "9d5821ad637a93917f8577d9357f80afbb3b7947fece47f0022b6c7f2125b00b",
+        "siblings": [
+          "db2a942df7c48b5351ad97cadb76bcbc94374c1d042f1761666c05dd976a62ac",
+          "6980dd55f14b3f11075b049dc74b001155c92b536f4ac749521cfcb4343742bd"
+        ],
+        "version": "bsv-hermes-receipt-batch/1"
+      },
+      {
+        "count": 3,
+        "index": 1,
+        "network": "mainnet",
+        "nonce_hex": "0202020202020202020202020202020202020202020202020202020202020202",
+        "receipt_id": "r2",
+        "receipt_sha256": "dac149a182ac8223659682f87ac3b4953f54430bb60ea630023a99c94a11f626",
+        "siblings": [
+          "a962f8e581b2c8023a31466c94d2f3bbb8e9d67d4be312e07adc064c6708e2e2",
+          "6980dd55f14b3f11075b049dc74b001155c92b536f4ac749521cfcb4343742bd"
+        ],
+        "version": "bsv-hermes-receipt-batch/1"
+      },
+      {
+        "count": 3,
+        "index": 2,
+        "network": "mainnet",
+        "nonce_hex": "0303030303030303030303030303030303030303030303030303030303030303",
+        "receipt_id": "r3",
+        "receipt_sha256": "07d0bf23ebeaa3405171236645f99c1b61b6772c0d94e11cb4510faf7fb53269",
+        "siblings": [
+          "231d498e17bff687a1c03abdfbf2408d692818d5afbb7340a2dd1d57b58d2fd6",
+          "943135649443e3049f45556896756d71581e6c6f86ddf16815cc11ef97dfd130"
+        ],
+        "version": "bsv-hermes-receipt-batch/1"
+      }
+    ]
+  },
+  "fixture": "synthetic, never funded; implementation-generated regression vector, not independent oracle",
+  "request": {
+    "approval": "absent",
+    "arguments": {
+      "text": "{\"commitment\":\"69fb04d0f2fb05d4d1195d72cf1b796a3b0be66e529c743dce0c91961a4af793\",\"count\":3,\"network\":\"mainnet\",\"version\":\"bsv-hermes-receipt-batch/1\"}",
+      "workflow_id": "synthetic-1"
+    },
+    "expected_commitment_script_hex": "006a206ffd74a473450bccf12d036f94d4ea2ed8528d26ef97df1ad3c1774cd3bc0633",
+    "expected_text_sha256": "6ffd74a473450bccf12d036f94d4ea2ed8528d26ef97df1ad3c1774cd3bc0633",
+    "inclusion": "unchecked",
+    "publication": "unchecked",
+    "required_operator_steps": [
+      "review frozen quote and limits",
+      "independent approve-sign",
+      "review exact signed txid",
+      "independent approve-submit"
+    ],
+    "signature": "missing",
+    "status": "not-prepared-not-signed-not-submitted",
+    "tool": "bsv_publish_prepare"
+  }
+}

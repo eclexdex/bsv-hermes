@@ -1,0 +1,105 @@
+{
+  "$comment": "Structural schema only. Hashes, unique names, event order and canonical restrictions require reference validator.",
+  "$defs": {
+    "descriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "size": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "sha256",
+        "size"
+      ],
+      "type": "object"
+    },
+    "event": {
+      "additionalProperties": false,
+      "properties": {
+        "event_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "index": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "previous": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/$defs/descriptor"
+        },
+        "response": {
+          "$ref": "#/$defs/descriptor"
+        },
+        "tool": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "index",
+        "tool",
+        "request",
+        "response",
+        "previous",
+        "event_digest"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "urn:hermes-receipt:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_inputs": {
+      "items": {
+        "$ref": "#/$defs/descriptor"
+      },
+      "type": "array"
+    },
+    "final_output": {
+      "$ref": "#/$defs/descriptor"
+    },
+    "instruction": {
+      "$ref": "#/$defs/descriptor"
+    },
+    "receipt_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/event"
+      },
+      "type": "array"
+    },
+    "version": {
+      "const": "hermes-receipt/v1"
+    }
+  },
+  "required": [
+    "version",
+    "instruction",
+    "approved_inputs",
+    "tools",
+    "final_output",
+    "receipt_digest"
+  ],
+  "type": "object"
+}

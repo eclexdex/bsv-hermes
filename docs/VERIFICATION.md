@@ -1,7 +1,7 @@
 # Verification and acceptance boundary
 
-The base/default and three offline kits remain dependency-free. Their original
-70 tests are retained unchanged. New integration tests use a separate environment
+The base/default and three offline kits remain dependency-free. Original domain
+cases are retained; registration counts include the new receipt producer. Crypto tests use a separate environment
 with bsv-sdk 2.4.0 and cryptography 48.0.0; no real wallet, operator credential,
 private SOUL, public POST or funded spend is permitted in this acceptance path.
 
@@ -31,7 +31,7 @@ mainnet cases. A skipped case never establishes acceptance.
 
 - Actual Plugin Doctor, PluginContext registration and scoped `registry.dispatch`
   JSON-string ABI; not only direct handlers or registration doubles.
-- Six defaults and nineteen tools with the three offline groups; three actual
+- Six defaults and twenty tools with the three offline groups; three actual
   registered skill paths. The separate mainnet smoke verifies fourteen tools
   (six defaults plus eight mainnet), valid dispatch for every added tool and
   invalid/spoofed fields rejected before runtime work.
@@ -83,6 +83,55 @@ factory/module, loopback URL, authority path, key, grant or arbitrary script.
 The project CI currently covers the dependency-free suite and clean base wheel;
 it does not certify mainnet crypto/platform compatibility. The mainnet native
 smoke and isolated SDK suite must be run explicitly for a release candidate.
+
+## Receipt release acceptance
+
+Use an explicitly trusted, **symlink-free TMPDIR**, especially on macOS where
+`/var` is a symlink. No custody path protection is weakened to make a smoke pass:
+
+```sh
+mkdir -p local-verification/receipt-tmp
+export TMPDIR="$(python -c 'from pathlib import Path; print(Path("local-verification/receipt-tmp").resolve())')"
+python -m unittest discover -s tests -v
+python scripts/receipt_adversarial.py --output local-verification/adversarial.json
+python scripts/receipt_mutations.py --output local-verification/mutations.json
+python scripts/update_manifest.py --check
+```
+
+Use the host interpreter/source for `scripts/receipt_host_smoke.py .`: actual
+gateway HookRegistry discovery and emit, unarmed no-write, canary exclusion and
+receipt input integration in a synthetic HOME. No live hooks or model run.
+`native_smoke.py` passes actual script-dispatch return bytes through the native
+run producer and independent checker. `mainnet_smoke.py` now prepares the exact
+batch publisher text through the existing independent sign/submit workflow.
+
+With reviewed setuptools >=77 and wheel already installed, run one full offline
+package gate (choose a **new** output directory; substitute actual interpreter paths):
+
+```sh
+python scripts/receipt_release_check.py --out local-verification/receipt-release \
+  --hermes-python /absolute/hermes-venv/bin/python \
+  --hermes-source /absolute/hermes-agent \
+  --sdk-python /absolute/pinned-sdk-venv/bin/python \
+  --browser-python /absolute/browser-test-python
+```
+
+This snapshots exact manifest-listed source, scans sources/archives, builds wheels
+twice, rebuilds a byte-identical wheel from sdist, installs both wheels offline in
+fresh venvs and runs the actual verifier/CLI/resources/tests outside the checkout.
+Those venvs have no Hermes, wallet SDK or crypto. Missing optional crypto returns
+unchecked, with explicit suite skips. The separate pinned SDK suite exercises
+positive signatures/RFC8032 and real mainnet software adapters. Extracted native
+install readback, Doctor/dispatch/skills, lifecycle hook tests, synthetic mainnet
+batch flow and actual browser tests follow when the optional harness paths are
+supplied. Omitted host/browser gates are reported as skips, not passes.
+
+`RESULTS.json` retains exact commands, exits, source and archive hashes, inventories
+and skip reasons. Wheel reproducibility is tested; sdist gzip/tar reproducibility
+is not claimed. The lane10 harness uses independently pinned production semantic
+translations, not reinterpretation of its draft hashes. The mutation runner resets
+between mutants and verifies imported mutated paths/hashes before assertion kills.
+The viewer's screenshot inspection is separate from DOM/network assertions.
 
 ## Not certified or approved
 

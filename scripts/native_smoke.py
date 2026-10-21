@@ -18,7 +18,7 @@ SKILLS={'bsv-hermes:inspect-evidence','bsv-hermes:plan-commitment','bsv-hermes:a
 
 
 def exercise(host, names):
-    values=cases(); results={}
+    values=cases(); results={}; raw_results={}
     assert set(host.manager._plugin_tool_names)==set(names), host.manager._plugin_tool_names
     assert set(host.manager._plugin_skills)==SKILLS
     for item in host.manager._plugin_skills.values():
@@ -32,6 +32,7 @@ def exercise(host, names):
         raw=registry.dispatch(name,values[name],scope=host.manager.scope_key,task_id='synthetic')
         assert type(raw) is str,(name,type(raw))
         result=json.loads(raw)
+        raw_results[name] = raw
         assert result['ok'] is True and 'result' in result and 'data' not in result,(name,result)
         for invalid in [None, [], True, '{bad JSON',dict(values[name],unknown='PRIVATE-CANARY')]:
             raw=registry.dispatch(name,invalid,scope=host.manager.scope_key)
@@ -39,6 +40,19 @@ def exercise(host, names):
             assert rejected['ok'] is False and rejected['error']['code']=='invalid_input',(name,rejected)
             assert 'PRIVATE-CANARY' not in raw and len(raw)<350
         results[name]=result
+    if 'bsv_assurance_run' in names:
+        import base64
+        from bsv_hermes.receipts.evidence import verify
+        req = dict(values['bsv_assurance_run'])
+        req['tools'] = [{'id':'actual-dispatch', 'name':'bsv_inspect_script', 'source':'explicit_wrapper_recorded',
+                        'arguments':{'id':'tool-request','bytes_b64':base64.b64encode(json.dumps(values['bsv_inspect_script']).encode()).decode()},
+                        'result':{'id':'tool-response','bytes_b64':base64.b64encode(raw_results['bsv_inspect_script'].encode()).decode()}}]
+        actual = json.loads(registry.dispatch('bsv_assurance_run',req,scope=host.manager.scope_key))
+        assert actual['ok']
+        independent = verify(actual['result']['bundle'])
+        assert independent['results']['chain']['status'] == 'match'
+        assert independent['source_authentication']['status'] == 'unchecked'
+        results['bsv_assurance_run'] = actual
     cap=results['bsv_capabilities']['result']
     assert set(cap['implemented'])==set(names)
     assert results['bsv_plan_commitment']['result']['locking_script_hex']=='006a20e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
@@ -64,6 +78,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix='bsv-smoke-') as temp:
         clean=Path(temp)/'bsv-hermes'
         shutil.copytree(path,clean,ignore=shutil.ignore_patterns('.git','local-verification','build','dist','*.egg-info','__pycache__','*.pyc'))
+        sys.path.insert(0, str(clean))  # independent verifier from the same staged source
         report=doctor_plugin(clean)
         assert report.ok and not report.findings,report.format_text()
         with _doctor_runtime(clean) as host:

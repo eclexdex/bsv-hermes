@@ -144,7 +144,12 @@ DOMAIN = 'bsv-hermes-identity/v1'
 
 
 def canonical(value):
-    """Restricted canonical JSON v1; no floats, Unicode normalization or whitespace folding."""
+    """Legacy JSON bytes, including finite floats; no Unicode normalization.
+
+    Preserve historical direct-library commitments. Native input schemas reject
+    floats; new receipt-v1 has a separate strict integer-only profile. Nonfinite
+    values remain forbidden. This helper is not RFC 8785 / cross-language JCS.
+    """
     return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('ascii')
 
 

@@ -59,6 +59,17 @@ Native results omit raw signed bytes and grants. Provider acknowledgement alone
 cannot settle; exact txid/raw readback is required. No auto-retry or refund is
 exposed. Full state-machine, crash and same-UID limits are in MAINNET.md.
 
+## Run receipts
+
+Optional assurance now also registers `bsv_assurance_run`, using strict
+`hermes-receipt/v1` rather than rewriting legacy assurance formats. The same
+distribution includes the standalone verifier and inert viewer. Exact core,
+signature, nonce-bearing batch and publication adapters are documented in
+[RECEIPTS.md](RECEIPTS.md); all six evidence dimensions remain separate.
+Legacy direct identity `canonical` still accepts finite floats, preserving old
+committed bytes; native schemas and new core receipts reject them. No silent
+change to an existing commitment preimage is made.
+
 ## Evidence vocabulary
 
 `matches`/`digest_match`/`integrity_match`: only the named supplied bytes/receipt reconstruction. `evidence_ready`: advisory combination of supplied integrity/completeness/network/time conditions, never deployment permission. `evidence_matches`: caller-token match, no authenticated human consent or durable replay protection. Null means unavailable/unperformed, not false and not verified. Parsing, arbitrary matching headers and custom batch membership do not establish SPV, PoW, selected-chain ancestry, confirmations, content truth or legal admissibility.

@@ -1,0 +1,16 @@
+{
+  "approved_inputs": [],
+  "final_output": {
+    "name": "output",
+    "sha256": "1d40584b4d88e00c05af6c648cdc360b9a21bf9bae67c48487ae65d892bdec66",
+    "size": 22
+  },
+  "instruction": {
+    "name": "instruction",
+    "sha256": "c62d9359fda1a2fbeb7674df88644ef0f08de631b96aeba38d5c3cca6899b965",
+    "size": 22
+  },
+  "receipt_digest": "185339c5429543058351ab8d5da59b13572b3574eed37bf0e6365abf4393b617",
+  "tools": [],
+  "version": "hermes-receipt/v1"
+}

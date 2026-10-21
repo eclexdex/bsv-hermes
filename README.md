@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/hermes-bsv-ledger.png" alt="Hermes holding a BSV coin, surrounded by connected ledger blocks" width="960" />
+<img src="https://raw.githubusercontent.com/eclexdex/bsv-hermes/main/docs/images/hermes-bsv-ledger.png" alt="Hermes holding a BSV coin, surrounded by connected ledger blocks" width="960" />
 
 # BSV Hermes
 
@@ -14,7 +14,7 @@ Offline by default · Six dependency-free default tools · Optional guarded main
 
 </div>
 
-> **Release candidate · v0.3.0rc1.** Six tools remain offline by default. The opt-in mainnet group integrates a dedicated wallet, bounded funding observations, exact transaction construction, separately authorized signing/submission and readback receipts. No automatic publication, arbitrary payments or chain-consensus verification. Production OS/custody isolation and any funded canary remain separate operator work. License selection is pending; see [license policy](LICENSE-POLICY.md).
+> **Release candidate · v0.3.0rc2.** Six tools remain offline by default. The opt-in mainnet group integrates a dedicated wallet, bounded funding observations, exact transaction construction, separately authorized signing/submission and readback receipts. No automatic publication, arbitrary payments or chain-consensus verification. Production OS/custody isolation and any funded canary remain separate operator work. License selection is pending; see [license policy](LICENSE-POLICY.md).
 
 Give your Hermes agent tools to inspect transaction and Script bytes, plan unsigned commitments, and produce versioned receipts for supplied SOUL content and work products. Add instruction, deployment-evidence and batch workflows through optional kits in the same installation.
 
@@ -73,6 +73,33 @@ anything that would require chain verification.
 ```
 
 Replace the example with your supplied transaction hex. Never include wallet secrets, private keys or seed phrases.
+
+## Offline run receipts and standalone verifier
+
+The same distribution now builds `hermes-receipt/v1` run receipts, verifies them
+without Hermes or a wallet, batches completed receipts, and renders a local viewer.
+Artifact bytes, evidence-chain links, caller-trusted signatures, batch membership,
+publication assertions and inclusion checks remain **separate results**. No overall
+green badge; hashes and signatures do not prove tool execution or human consent.
+
+```sh
+python -m bsv_hermes.receipts create examples/receipt-request.json --output bundle.json
+python -m bsv_hermes.receipts verify bundle.json \
+  --artifact instruction=examples/receipt-instruction.txt \
+  --artifact output=examples/receipt-output.txt --output report.json
+python -m bsv_hermes.receipts view report.json --output receipt.html
+```
+
+These files are synthetic. Output files must not exist. An installed wheel exposes
+`bsv-receipt` and `bsv-receipt-verify` for the same offline workflow. Optional Ed25519
+verification uses `cryptography==48.0.0`; missing crypto is unchecked, not passed.
+The native producer `bsv_assurance_run` is opt-in under assurance. Lifecycle recording
+is metadata-only, separately host-armed per run and **never activated by installation**.
+Selected-chain validation and production receipt signing are not implemented.
+
+See [receipt formats, explicit adapters and limits](docs/RECEIPTS.md). Batching only
+generates inert arguments for the existing quote/independent sign/submit approvals.
+The viewer is bundled; the separate fleet dashboard preview below is not.
 
 ## Agent workflows
 
@@ -176,12 +203,12 @@ Review configuration changes yourself and restart to apply. The repository never
 | Kit | Additional tools | Focus |
 | --- | --- | --- |
 | Identity | `bsv_identity_instructions`, `bsv_identity_posture`, `bsv_identity_release` | Supplied instruction, posture and release commitments |
-| Assurance | `bsv_assurance_tool_chain`, `bsv_assurance_deployment_gate`, `bsv_assurance_approval_intent` | Evidence chains and advisory deployment/approval checks |
+| Assurance | `bsv_assurance_run`, `bsv_assurance_tool_chain`, `bsv_assurance_deployment_gate`, `bsv_assurance_approval_intent` | Evidence chains and advisory deployment/approval checks |
 | Integrations | `bsv_int_batch`, `bsv_int_verify_batch`, `bsv_int_content`, `bsv_int_overlay`, `bsv_int_handoff`, `bsv_int_chain`, `bsv_int_reconcile` | Offline batches, content and handoff/reconciliation workflows |
 
-The three **offline** kits give 19 tools. They do not grant authority. The separate
+The three **offline** kits give 20 tools. They do not grant authority. The separate
 `mainnet` group adds eight guarded tools: defaults + mainnet = **14 tools**; all
-four groups = **27 tools**, still one plugin and one `bsv` toolset. No new advanced
+four groups = **28 tools**, still one plugin and one `bsv` toolset. No new advanced
 protocol or dashboard packs were merged.
 
 ### Opt-in mainnet workflow
@@ -217,17 +244,17 @@ spent mainnet funds, submitted to a public broadcaster or enabled a live profile
 
 ## Dashboard preview
 
-The separate OPS dashboard candidate presents supplied agent snapshots and receipt queues. These screenshots use synthetic fixtures, not live fleet data. The dashboard is a development preview and is **not bundled with the v0.2.0 plugin**.
+The separate OPS dashboard candidate presents supplied agent snapshots and receipt queues. These screenshots use synthetic fixtures, not live fleet data. The dashboard is a development preview and is **not bundled with the current plugin**.
 
 ### Desktop operations view
 
-![OPS dashboard desktop preview showing synthetic agent states, receipt queues and unchecked evidence layers](docs/images/ops-dashboard-desktop.png)
+![OPS dashboard desktop preview showing synthetic agent states, receipt queues and unchecked evidence layers](https://raw.githubusercontent.com/eclexdex/bsv-hermes/main/docs/images/ops-dashboard-desktop.png)
 
 Receipt-first navigation keeps supplied evidence flags, stale timestamps and unknown states visible. The display does not turn supplied claims into cryptographic verification.
 
 ### Mobile operations view
 
-<img src="docs/images/ops-dashboard-mobile.png" alt="Mobile OPS dashboard preview with synthetic fixture labels, receipt filters and offline evidence warnings" width="390" />
+<img src="https://raw.githubusercontent.com/eclexdex/bsv-hermes/main/docs/images/ops-dashboard-mobile.png" alt="Mobile OPS dashboard preview with synthetic fixture labels, receipt filters and offline evidence warnings" width="390" />
 
 The narrow layout brings the receipt queue forward and retains the same offline and unverified-evidence labels. Screenshots illustrate the candidate interface; they are not proof of live collection or chain verification.
 
@@ -336,6 +363,7 @@ The external guides describe features such as wallets, HTTP payments, UHRP and S
 
 ## Documentation
 
+- [Offline receipts, standalone verification and viewer](docs/RECEIPTS.md)
 - [Mainnet operator ceremony and recovery](docs/MAINNET.md)
 - [Result contracts and formats](docs/CONTRACT.md)
 - [Verification and packaging](docs/VERIFICATION.md)

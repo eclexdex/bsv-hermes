@@ -86,6 +86,8 @@ def tool_specs(groups=None, *, mainnet_directory=None, mainnet_python=None):
         for kind in ('instructions', 'posture', 'release'):
             tools['bsv_identity_' + kind] = (_kit_handler(lambda a, k=kind: identity.execute(k, a)), identity.schema(kind))
     if 'assurance' in groups:
+        from .receipts.native import tool_specs as receipt_specs
+        tools.update(receipt_specs())
         for operation in ('tool_chain', 'deployment_gate', 'approval_intent'):
             name = 'bsv_assurance_' + operation
             tools[name] = (_kit_handler(assurance.handler(operation)), {'name': name,

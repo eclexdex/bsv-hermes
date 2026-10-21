@@ -5,6 +5,14 @@ Hermes is a separately installed host; setuptools is build tooling. The optional
 `mainnet` extra requires **bsv-sdk==2.4.0** and **cryptography==48.0.0**. Install it
 in a dedicated interpreter: do not replace the Hermes host's crypto dependencies.
 
+Receipt production, verification, batching, inclusion arithmetic and the viewer
+also use stdlib only. The optional `receipt-signature` extra pins the **same
+cryptography==48.0.0**, not the receipt prototype's incompatible 49.0.0 proposal.
+RFC8032 and frozen signature vectors are exercised against 48.0.0. No crypto source
+or novel signature implementation is included; unavailable v2 backend is unchecked.
+The existing PyCA notices and hash lock cover the selected backend. Browser QA
+uses separately installed Playwright/Chrome; neither is a product dependency.
+
 ## Reviewed selection
 
 - Official [BSV Python SDK](https://github.com/bsv-blockchain/py-sdk), source commit
