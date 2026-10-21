@@ -10,7 +10,7 @@
 
 Offline by default · Python standard library · Six default tools · Three opt-in kits
 
-[Quick start](#quick-start) · [How it works](#how-it-works) · [What you can do](#what-you-can-do) · [Optional kits](#optional-kits) · [FAQ](#faq) · [Documentation](#documentation)
+[Quick start](#quick-start) · [Workflows](#agent-workflows) · [Tools](#what-you-can-do) · [Dashboards](#dashboard-preview) · [BSV resources](#learn-and-build-with-bsv) · [FAQ](#faq) · [Documentation](#documentation)
 
 </div>
 
@@ -73,6 +73,38 @@ anything that would require chain verification.
 ```
 
 Replace the example with your supplied transaction hex. Never include wallet secrets, private keys or seed phrases.
+
+## Agent workflows
+
+### Review before you anchor
+
+```text
+Inspect my supplied transaction and commitment script. Report structural
+findings, identify exactly which bytes are committed, and list the checks
+that still need a wallet, node or chain-proof verifier. Make no network calls.
+```
+
+Start with `bsv_inspect_transaction`, `bsv_inspect_script` and the inspect-evidence skill. A parsed transaction is not necessarily valid, mined or spendable.
+
+### Record a release without exposing its contents
+
+```text
+Using only the approved digests and byte counts I supply, create an artifact
+receipt for this release. Explain the receipt format and privacy limits.
+Do not read other files or publish the receipt.
+```
+
+Use `bsv_assurance_artifact`. For supplied SOUL bytes, use `bsv_identity_soul` instead: the formats and domains are intentionally distinct. Keep private content out of tool arguments unless your host and model-provider policies permit it.
+
+### Review deployment evidence
+
+```text
+With the assurance kit enabled, review this supplied tool-call evidence chain
+and deployment-gate input. Separate failed comparisons, missing evidence and
+unchecked claims. Treat the result as advisory, not permission to deploy.
+```
+
+This needs the [assurance kit](#optional-kits). The plugin does not collect the evidence, authenticate operator approval or execute the deployment.
 
 ## How it works
 
@@ -240,6 +272,23 @@ python -c "from setuptools.build_meta import build_wheel, build_sdist; print(bui
 ```
 
 Regenerate the source manifest only after reviewed changes. Inventory hashes detect corruption, not author authenticity. Final distribution acceptance should repeat installation and native checks on an extracted archive outside the checkout. See [verification instructions](docs/VERIFICATION.md).
+
+## Learn and build with BSV
+
+Choose the reference that matches your next step. These are external resources, not dependencies or capabilities automatically installed by this plugin.
+
+| Your goal | Start here | What to look for |
+| --- | --- | --- |
+| Understand transactions, Script and the network | [BSV Skills Center](https://docs.bsvblockchain.org/) | Protocol concepts, technical learning and network architecture |
+| Find ecosystem references and real-world applications | [BSV Hub](https://hub.bsvblockchain.org/) | Unified knowledge bases, case studies and links to protocol resources |
+| Build an application with a wallet or SDK | [BSV developer guides](https://bsv.writedocs.io/) | Testnet onboarding, wallet integration, payments, storage and application examples |
+| Check an interoperability proposal | [BRC specifications](https://bsv.brc.dev/) | Exact data formats, protocol definitions and each proposal's current status |
+| Work with the TypeScript SDK | [BSV TypeScript SDK](https://github.com/bsv-blockchain/ts-sdk) | SDK source, installation guidance and application-building primitives |
+| Explore implementation repositories | [BSV Blockchain on GitHub](https://github.com/bsv-blockchain) | Source projects and their individual documentation and licenses |
+
+**Suggested path:** learn the transaction model → inspect supplied bytes locally → prepare an unsigned commitment → review the relevant SDK and specification before designing any separate signing or submission integration.
+
+The external guides describe features such as wallets, HTTP payments, UHRP and SPV. Linking to them does **not** mean this plugin implements those features. BRCs include historical and evolving material: check directory guidance and normative status rather than assuming every proposal is a current interoperable standard. External code and documents retain their own terms.
 
 ## Documentation
 
